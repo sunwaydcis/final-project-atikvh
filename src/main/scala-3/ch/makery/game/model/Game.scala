@@ -17,7 +17,7 @@ class Game {
   def history: Seq[GameHistory] = _history.toSeq // Immutable history view
 
   def startGame(level: String): Unit = {
-    //_level = level
+    _level = GameLevelFactory.getLevel(level)
     _score = 0
     _timer = _level.initialTimer
   }
