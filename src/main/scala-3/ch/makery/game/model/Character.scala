@@ -1,3 +1,4 @@
+// 22100259 Final Project Assignment
 package ch.makery.game.model
 
 abstract class Character(val points: Int, val effect: String) {

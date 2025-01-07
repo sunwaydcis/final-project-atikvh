@@ -1,33 +1,48 @@
+// 22100259 Final Project Assignment
 package ch.makery.game.model
 
 import scala.collection.mutable
+import java.time.LocalDateTime
 
 class Game {
-  var score: Int = 0
-  var timer: Int = 180 // 3 minutes in seconds
-  var level: String = "Easy"
-  val history: mutable.ListBuffer[GameHistory] = mutable.ListBuffer()
+  private var _score: Int = 0 // Change when the game is started
+  private var _timer: Int = 180 // Default timer is 3 minutes - also change
+  private var _level: String = "" // Change according to player's choice
+  private val _history: mutable.ListBuffer[GameHistory] = mutable.ListBuffer()
+
+  // Accessor
+  def score: Int = _score
+  def timer: Int = _timer
+  def level: String = _level
+  def history: Seq[GameHistory] = _history.toSeq // Immutable history view
 
   def startGame(level: String): Unit = {
-    this.level = level
-    score = 0
-    timer = if (level == "Easy") 180 else if (level == "Medium") 180 else 180
+    _level = level
+    _score = 0
+    _timer = 180
   }
 
   def updateScore(points: Int): Unit = {
-    score = Math.max(0, score + points)
+    _score = Math.max(0, _score + points) // so score not negative
   }
 
   def decrementTimer(): Unit = {
-    timer = Math.max(0, timer - 1)
+    _timer = Math.max(0, _timer - 1) // so timer not negative
   }
 
+  def isGameOver: Boolean = _timer <= 0
+
   def saveHistory(): Unit = {
-    history += GameHistory(java.time.LocalDateTime.now(), level, score)
+    _history += GameHistory(java.time.LocalDateTime.now(), _level, _score)
   }
 
   def deleteHistory(index: Int): Unit = {
-    if (index >= 0 && index < history.size) history.remove(index)
+    if (index >= 0 && index < history.size) _history.remove(index)
+  }
+
+  def reset(): Unit = {
+    _score = 0
+    _timer = 180
   }
 }
 
