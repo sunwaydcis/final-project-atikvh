@@ -29,6 +29,10 @@ class Game {
   def decrementTimer(): Unit = {
     _timer = Math.max(0, _timer - 1) // so timer not negative
   }
+  
+  def decrementTimerBy(seconds: Int): Unit = {
+    _timer = Math.max(0, _timer - seconds)
+  }
 
   def isGameOver: Boolean = _timer <= 0
 
