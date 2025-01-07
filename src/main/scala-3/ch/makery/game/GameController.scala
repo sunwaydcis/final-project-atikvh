@@ -1,10 +1,9 @@
 // 22100259 Final Project Assignment
 package ch.makery.game
 
-import ch.makery.game.model.{Character, Game, GameLevelFactory}
-import ch.makery.game.model.{Character, BrownMole, PinkMole, GreyMole, Bomb}
+import ch.makery.game.model.{Bomb, BrownMole, Character, Game, GreyMole, PinkMole}
 import scalafx.application.Platform
-import scalafx.scene.control.{Button, Label}
+import scalafx.scene.control.Label
 import scalafx.scene.layout.GridPane
 
 class GameController {
@@ -41,10 +40,23 @@ class GameController {
   }
 
   def cellClicked(cellIndex: Int): Unit = {
-
+    // Map cell to character
+    val character: Character = generateRandomCharacter()
+    character.applyEffect(game)
+    updateUI()
   }
 
-  def generateRandomCharacter(): Unit = {
+  private def generateRandomCharacter(): Character = {
+    // based on character probability
+    val probabilities = game.level.characterProbability
+    val randomValue = scala.util.Random.nextInt(100)
+    probabilities.collectFirst {
+      case (character, threshold) if randomValue < threshold => character match {
+        case "Brown Mole" => BrownMole()
+        case "Pink Mole" => PinkMole()
+        case "Grey Mole" => GreyMole()
+        case "Bomb" => Bomb()
+      }
+    }.getOrElse(BrownMole()) // -> default character
   }
-  
 }
