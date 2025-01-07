@@ -34,7 +34,7 @@ class Game {
     _timer = Math.max(0, _timer - seconds)
   }
 
-  def isGameOver: Boolean = _timer <= 0
+  def isGameOver: Boolean = _timer == 0
 
   def saveHistory(): Unit = {
     _history += GameHistory(java.time.LocalDateTime.now(), _level.name, _score)
