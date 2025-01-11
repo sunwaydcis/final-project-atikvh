@@ -1,14 +1,19 @@
 // 22100259 Final Project Assignment
 package ch.makery.game.model
 
-abstract class GameLevel(val name: String, val initialTimer: Int, val characterProbability: Map[String, Int])
+abstract class GameLevel(
+                          val name: String,
+                          val initialTimer: Int,
+                          val characterProbability: Map[String, Int],
+                          val backgroundImagePath: String)
 
 case class EasyLevel() extends GameLevel(
   name = "Easy",
   initialTimer = 180,
   characterProbability = Map(
     "Brown Mole" -> 100
-  )
+  ),
+  backgroundImagePath = "/ch/makery/game/assets/Easy.png"
 )
 
 case class MediumLevel() extends GameLevel(
@@ -18,7 +23,8 @@ case class MediumLevel() extends GameLevel(
     "Brown Mole" -> 70,
     "Grey Mole" -> 20,
     "Bomb" -> 10
-  )
+  ),
+  backgroundImagePath = "/ch/makery/game/assets/Medium.png"
 )
 
 case class HardLevel() extends GameLevel(
@@ -29,5 +35,6 @@ case class HardLevel() extends GameLevel(
     "Pink Mole" -> 25,
     "Grey Mole" -> 15,
     "Bomb" -> 10
-  )
+  ),
+  backgroundImagePath = "/ch/makery/game/assets/Hard.png"
 )
