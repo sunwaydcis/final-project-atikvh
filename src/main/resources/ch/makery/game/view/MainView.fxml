@@ -14,9 +14,9 @@
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
+      <ImageView fx:id="backgroundImageView" fitHeight="540.0" fitWidth="960.0" pickOnBounds="true" preserveRatio="true" />
       <GridPane fx:id="cellGrid" layoutX="279.0" layoutY="180.0" prefHeight="274.0" prefWidth="401.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -39,17 +39,17 @@
             <Font name="Bookman Old Style Bold" size="24.0" />
          </font>
       </Label>
-      <Button layoutX="403.0" layoutY="154.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="154.0" text="EASY" textFill="#24a41b">
+      <Button fx:id="easyButton" layoutX="403.0" layoutY="154.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="154.0" text="EASY" textFill="#24a41b">
          <font>
             <Font name="Arial Narrow Bold" size="20.0" />
          </font>
       </Button>
-      <Button layoutX="403.0" layoutY="209.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="154.0" text="MEDIUM" textFill="#a40a0a">
+      <Button fx:id="mediumButton" layoutX="403.0" layoutY="209.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="154.0" text="MEDIUM" textFill="#a40a0a">
          <font>
             <Font name="Arial Narrow Bold" size="20.0" />
          </font>
       </Button>
-      <Button layoutX="403.0" layoutY="264.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="154.0" text="HARD" textFill="#790367">
+      <Button fx:id="hardButton" layoutX="403.0" layoutY="264.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="154.0" text="HARD" textFill="#790367">
          <font>
             <Font name="Arial Narrow Bold" size="20.0" />
          </font>
@@ -78,6 +78,5 @@
          </fill>
       </Circle>
       <Polygon fill="#004079" layoutX="426.0" layoutY="375.0" points="43.99998474121094, 40.0, 43.99998474121094, 6.399993896484375, 74.40000915527344, 22.399993896484375" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-      <ImageView fx:id="backgroundImageView" fitHeight="540.0" fitWidth="960.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>
