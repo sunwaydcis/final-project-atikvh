@@ -1,18 +1,25 @@
 // 22100259 Final Project Assignment
 package ch.makery.game
 
-import ch.makery.game.model.{Bomb, BrownMole, Character, Game, GreyMole, PinkMole}
+import ch.makery.game.model.{Bomb, BrownMole, Character, Game, GreyMole, PinkMole, GameLevel}
 import scalafx.application.Platform
-import scalafx.scene.control.Label
-import scalafx.scene.layout.GridPane
+import scalafx.scene.control.{Button,Label}
+import scalafx.scene.layout.{AnchorPane, GridPane}
+import scalafx.scene.image.ImageView
 
 class GameController {
   var game: Game = new Game()
+  var currentLevel: GameLevel = _
 
   // UI Components
+  var rootPane: AnchorPane = _
   var scoreLabel: Label = _
   var timerLabel: Label = _
   var cellGrid: GridPane = _
+  var playButton: Button = _
+  var levelButtons: Map[String, Button] = Map()
+
+  var backgroundImageView: ImageView = _
 
   def initialize(): Unit = {
     updateUI()
