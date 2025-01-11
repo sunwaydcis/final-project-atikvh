@@ -13,5 +13,8 @@ object MainApp extends JFXApp3 {
   var roots: Option[sfxs.layout.BorderPane] = None
   override def start(): Unit = {
     val rootResource = getClass.getResource("view/RootLayout.fxml")
+    val loader = new FXMLLoader(rootResource)
+    loader.load()
+    roots = Option(loader.getRoot[jfxs.layout.BorderPane])
   }
 }
