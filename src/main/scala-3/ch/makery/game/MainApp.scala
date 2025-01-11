@@ -19,7 +19,20 @@ object MainApp extends JFXApp3 {
 
     stage = new PrimaryStage():
       title = "Whack-a-mole Game"
-      scene = new Scene():
+      scene = new Scene(){
         root = roots.get
+        maxWidth = 960.0
+        maxHeight = 540.0
+      }
+
+
+    showGame()
+  }
+  def showGame(): Unit = {
+    val resource = getClass.getResource("view/MainView.fxml")
+    val loader = new FXMLLoader(resource)
+    loader.load()
+    val roots = loader.getRoot[jfxs.layout.AnchorPane]
+    this.roots.get.center = roots
   }
 }
