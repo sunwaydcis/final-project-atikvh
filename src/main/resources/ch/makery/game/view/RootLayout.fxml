@@ -11,17 +11,20 @@
         <menus>
           <Menu mnemonicParsing="false" text="Settings">
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem mnemonicParsing="false" text="Pause" />
+                  <MenuItem mnemonicParsing="false" text="Restart" />
+                  <MenuItem mnemonicParsing="false" text="End" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="History">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+              <MenuItem mnemonicParsing="false" text="View" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Tutorial">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem mnemonicParsing="false" text="Characters" />
+                  <MenuItem mnemonicParsing="false" text="How to play" />
             </items>
           </Menu>
         </menus>
