@@ -1,15 +1,15 @@
 // 22100259 Final Project Assignment
 package ch.makery.game
 
-import ch.makery.game.model.{Bomb, BrownMole, Character, Game, GreyMole, PinkMole, GameLevel}
+import ch.makery.game.model._
 import scalafx.application.Platform
-import scalafx.scene.control.{Button,Label}
+import scalafx.scene.control.{Button, Label}
 import scalafx.scene.layout.{AnchorPane, GridPane}
 import scalafx.scene.image.ImageView
 
 class GameController {
   var game: Game = new Game()
-  var currentLevel: GameLevel = _
+  var currentLevel: GameLevel = EasyLevel()
 
   // UI Components
   var rootPane: AnchorPane = _
@@ -22,18 +22,30 @@ class GameController {
   var backgroundImageView: ImageView = _
 
   def initialize(): Unit = {
-    updateUI()
-  }
-
-  def startGame(level: String): Unit = {
-    game.startGame(level)
-    updateUI()
-    startTimer()
-  }
-
-  private def updateUI(): Unit = {
+    currentLevel = EasyLevel()
+    updateBackground()
     scoreLabel.text = f"Score: ${game.score}"
     timerLabel.text = f"Time: ${game.timer}"
+    levelButtons("Easy").onAction = _ => selectLevel(EasyLevel())
+    levelButtons("Medium").onAction = _ => selectLevel(MediumLevel())
+    levelButtons("Hard").onAction = _ => selectLevel(HardLevel())
+    playButton.onAction = _ => startGame()
+  }
+  
+  private def updateBackground(): Unit = {
+    val background = new Background(currentLevel)
+    backgroundImageView.image = background.getImage
+  }
+  
+  private def selectLevel(level: GameLevel): Unit = {
+    currentLevel = level
+    game.startGame(level)
+    updateBackground()
+  }
+
+  def startGame(): Unit = {
+    game.startGame(currentLevel)
+    startTimer()
   }
 
   private def startTimer(): Unit = {
@@ -43,11 +55,15 @@ class GameController {
         Thread.sleep(1000)
         game.decrementTimer()
       }
+      Platform.runLater(()=> endGame())
     }).start()
+  }
+  
+  private def endGame(): Unit = {
+    game.saveHistory()
   }
 
   def cellClicked(cellIndex: Int): Unit = {
-    // Map cell to character
     val character: Character = generateRandomCharacter()
     character.applyEffect(game)
     updateUI()
@@ -55,7 +71,7 @@ class GameController {
 
   private def generateRandomCharacter(): Character = {
     // based on character probability
-    val probabilities = game.level.characterProbability
+    val probabilities = currentLevel.characterProbability
     val randomValue = scala.util.Random.nextInt(100)
     probabilities.collectFirst {
       case (character, threshold) if randomValue < threshold => character match {
@@ -65,5 +81,10 @@ class GameController {
         case "Bomb" => Bomb()
       }
     }.getOrElse(BrownMole()) // -> default character
+  }
+  
+  private def updateUI(): Unit = {
+    scoreLabel.text = f"Score: ${game.score}"
+    timerLabel.text = f"Time: ${game.timer}"
   }
 }
