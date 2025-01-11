@@ -25,7 +25,6 @@ object MainApp extends JFXApp3 {
         maxHeight = 540.0
       }
 
-
     showGame()
   }
   def showGame(): Unit = {
