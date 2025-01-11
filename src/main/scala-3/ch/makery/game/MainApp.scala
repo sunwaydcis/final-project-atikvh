@@ -16,5 +16,10 @@ object MainApp extends JFXApp3 {
     val loader = new FXMLLoader(rootResource)
     loader.load()
     roots = Option(loader.getRoot[jfxs.layout.BorderPane])
+
+    stage = new PrimaryStage():
+      title = "Whack-a-mole Game"
+      scene = new Scene():
+        root = roots.get
   }
 }
