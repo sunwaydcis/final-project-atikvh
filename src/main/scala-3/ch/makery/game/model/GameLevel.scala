@@ -21,8 +21,7 @@ case class MediumLevel() extends GameLevel(
   initialTimer = 180,
   characterProbability = Map(
     "Brown Mole" -> 70,
-    "Grey Mole" -> 20,
-    "Bomb" -> 10
+    "Bomb" -> 30
   ),
   backgroundImagePath = "/ch/makery/game/assets/Medium.png"
 )
