@@ -54,11 +54,11 @@
             <Font name="Arial Narrow Bold" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="playButton" layoutX="444.0" layoutY="384.0" prefHeight="80.0" prefWidth="80.0" style="-fx-background-color: transparent;">
+      <Button fx:id="playButton" layoutX="419.0" layoutY="367.0" prefHeight="103.0" prefWidth="130.0" style="-fx-background-color: transparent;">
          <graphic>
-            <AnchorPane>
+            <AnchorPane prefHeight="118.0" prefWidth="100.0">
                <children>
-                  <Circle radius="36.0" stroke="#fff2004e" strokeType="INSIDE">
+                  <Circle layoutX="57.0" layoutY="50.0" radius="50.0" stroke="#fff2004e" strokeType="INSIDE">
                      <fill>
                         <RadialGradient centerX="0.5" centerY="0.5" radius="0.7385321013424375">
                            <stops>
@@ -76,7 +76,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Polygon fill="#004079" points="20, 10, 20, 70, 60, 40" stroke="BLACK" strokeWidth="0.0" />
+                  <Polygon fill="#004079" layoutX="23.0" layoutY="4.0" points="20.0, 26.399993896484375, 20.0, 65.19998168945312, 58.0, 43.399993896484375" stroke="BLACK" strokeWidth="0.0" />
                </children>
             </AnchorPane>
          </graphic>
