@@ -6,6 +6,7 @@ import scalafx.application.Platform
 import scalafx.scene.control.{Button, Label}
 import scalafx.scene.layout.{AnchorPane, GridPane}
 import scalafx.scene.image.ImageView
+import scalafx.scene.image.Image
 import javafx.scene.input.{KeyEvent, KeyCode}
 
 class GameController {
@@ -36,14 +37,18 @@ class GameController {
   }
   
   private def updateBackground(): Unit = {
-    val background = new Background(currentLevel)
-    backgroundImageView.image = background.getImage
+    val backgroundImagePath = currentLevel match {
+      case EasyLevel() => "assets/Easy 1.png"
+      case MediumLevel() => "assets/Medium 1.png"
+      case HardLevel() => "assets/Hard 1.png"
+    }
+    backgroundImageView.image = new Image(backgroundImagePath)
   }
   
   private def selectLevel(level: GameLevel): Unit = {
     currentLevel = level
-    game.startGame(level)
     updateBackground()
+    game.startGame(level)
   }
 
   def startGame(): Unit = {

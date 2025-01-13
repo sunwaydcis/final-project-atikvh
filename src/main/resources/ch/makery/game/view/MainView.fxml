@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.paint.Color?>
@@ -12,30 +11,27 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.game.GameController.scala">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.game.GameController">
    <children>
-      <ImageView fx:id="backgroundImageView" fitHeight="540.0" fitWidth="960.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../assets/Easy%201.png" />
-         </image></ImageView>
-      <Button fx:id="easyButton" layoutX="403.0" layoutY="154.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="154.0" text="EASY" textFill="#24a41b">
+      <ImageView fx:id="backgroundImageView" fitHeight="540.0" fitWidth="960.0" pickOnBounds="true" preserveRatio="true"/>
+      <Button fx:id="easyButton" layoutX="403.0" layoutY="154.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="154.0" text="EASY" textFill="#24a41b" onAction="#setEasyLevel">
          <font>
             <Font name="Arial Narrow Bold" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="mediumButton" layoutX="403.0" layoutY="209.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="154.0" text="MEDIUM" textFill="#a40a0a">
+      <Button fx:id="mediumButton" layoutX="403.0" layoutY="209.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="154.0" text="MEDIUM" textFill="#a40a0a" onAction="#setMediumLevel">
          <font>
             <Font name="Arial Narrow Bold" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="hardButton" layoutX="403.0" layoutY="264.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="154.0" text="HARD" textFill="#790367">
+      <Button fx:id="hardButton" layoutX="403.0" layoutY="264.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="154.0" text="HARD" textFill="#790367" onAction="#setHardLevel">
          <font>
             <Font name="Arial Narrow Bold" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="playButton" layoutX="419.0" layoutY="367.0" prefHeight="103.0" prefWidth="130.0" style="-fx-background-color: transparent;">
+      <Button fx:id="playButton" layoutX="419.0" layoutY="367.0" prefHeight="103.0" prefWidth="130.0" style="-fx-background-color: transparent;" onAction="#startGame">
          <graphic>
-            <AnchorPane fx:id="plau" prefHeight="118.0" prefWidth="100.0">
+            <AnchorPane fx:id="playIcon" prefHeight="118.0" prefWidth="100.0">
                <children>
                   <Circle layoutX="57.0" layoutY="50.0" radius="50.0" stroke="#fff2004e" strokeType="INSIDE">
                      <fill>
