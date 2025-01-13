@@ -1,13 +1,11 @@
-package ch.makery.game
-
-import scalafx.application.JFXApp3
-import scalafx.scene.Scene
+//22100259 Final Project Assignment
 import javafx.fxml.FXMLLoader
-import scalafx.scene as sfxs
 import javafx.scene as jfxs
+import scalafx.Includes.*
 import scalafx.application.JFXApp3
 import scalafx.application.JFXApp3.PrimaryStage
-import scalafx.Includes.*
+import scalafx.scene as sfxs
+import scalafx.scene.Scene
 
 object MainApp extends JFXApp3 {
   var roots: Option[sfxs.layout.BorderPane] = None
