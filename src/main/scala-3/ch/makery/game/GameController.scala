@@ -52,6 +52,12 @@ class GameController {
   }
 
   def startGame(): Unit = {
+    val gameBackgroundImagePath = currentLevel match {
+      case EasyLevel() => "assets/Easy.png"
+      case MediumLevel() => "assets/Medium.png"
+      case HardLevel() => "assets/Hard.png"
+    }
+    backgroundImageView.image = new Image(gameBackgroundImagePath)
     game.startGame(currentLevel)
     startTimer()
   }
