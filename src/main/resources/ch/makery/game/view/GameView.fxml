@@ -2,7 +2,8 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.ColorInput?>
-<?import javafx.scene.effect.GaussianBlur?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -13,8 +14,11 @@
 
 <AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <ImageView fx:id="backgroundImageView" fitHeight="540.0" fitWidth="960.0" pickOnBounds="true" preserveRatio="true" />
-        <GridPane fx:id="cellGrid" gridLinesVisible="true" layoutX="300.0" layoutY="90.0" prefHeight="360.0" prefWidth="360.0">
+        <ImageView fx:id="backgroundImageView" fitHeight="540.0" fitWidth="960.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/Easy.png" />
+         </image></ImageView>
+        <GridPane fx:id="cellGrid" alignment="TOP_RIGHT" layoutX="300.0" layoutY="81.0" prefHeight="360.0" prefWidth="360.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -26,7 +30,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
          <effect>
-            <GaussianBlur radius="38.85" />
+            <InnerShadow />
          </effect>
          <children>
             <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="120.0" prefWidth="120.0">
