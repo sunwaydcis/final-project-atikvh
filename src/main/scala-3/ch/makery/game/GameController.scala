@@ -3,62 +3,46 @@ package ch.makery.game
 
 import ch.makery.game.model.*
 import scalafx.application.Platform
-import scalafx.scene.control.{Button, Label}
-import scalafx.scene.layout.{AnchorPane, GridPane}
-import scalafx.scene.image.ImageView
-import scalafx.scene.image.Image
-import javafx.scene.input.{KeyEvent, KeyCode}
+import javafx.fxml.FXML
+import scalafx.scene.control.Label
+import scalafx.scene.image.{Image, ImageView}
+import javafx.scene.input.{KeyCode, KeyEvent}
+import scalafx.scene.layout.GridPane
 
 class GameController {
-  var game: Game = new Game()
-  var currentLevel: GameLevel = EasyLevel()
+  @FXML var scoreLabel: Label = _
+  @FXML var timerLabel: Label = _
+  @FXML var cellGrid: GridPane = _
+  @FXML var backgroundImageView: ImageView = _
 
-  // UI Components
-  var rootPane: AnchorPane = _
-  var scoreLabel: Label = _
-  var timerLabel: Label = _
-  var cellGrid: GridPane = _
-  var playButton: Button = _
-  var levelButtons: Map[String, Button] = Map()
-  var backgroundImageView: ImageView = _
+  private var game: Game = new Game()
+  private var currentLevel: GameLevel = EasyLevel()
+  private val cells: Array[GameCell] = Array.ofDim(9)
 
   def initialize(): Unit = {
-    currentLevel = EasyLevel()
-    updateBackground()
-    scoreLabel.text = f"Score: ${game.score}"
-    timerLabel.text = f"Time: ${game.timer}"
-    levelButtons("Easy").onAction = _ => selectLevel(EasyLevel())
-    levelButtons("Medium").onAction = _ => selectLevel(MediumLevel())
-    levelButtons("Hard").onAction = _ => selectLevel(HardLevel())
-    playButton.onAction = _ => startGame()
+    setupGrid()
+    startGame(currentLevel)
+  }
 
-    rootPane.onKeyPressed = (event: KeyEvent) => handleKeyPress(event)
-    rootPane.requestFocus()
-  }
-  
-  private def updateBackground(): Unit = {
-    val backgroundImagePath = currentLevel match {
-      case EasyLevel() => "assets/Easy 1.png"
-      case MediumLevel() => "assets/Medium 1.png"
-      case HardLevel() => "assets/Hard 1.png"
+  private def setupGrid(): Unit = {
+    cellGrid.getChildren.clear()
+    for (i <- 0 until 9) {
+      val cell = new GameCell()
+      cells(i) = cell
+      cellGrid.add(cell, i % 3, i / 3)
+      cell.onClick = () => cellClicked(i)
     }
-    backgroundImageView.image = new Image(backgroundImagePath)
+    cellGrid.sceneProperty().addListener((_, _, newScene) => {
+      if (newScene != null) {
+        newScene.addEventHandler(KeyEvent.KEY_PRESSED, (event: KeyEvent) => handleKeyPress(event))
+      }
+    })
   }
-  
-  private def selectLevel(level: GameLevel): Unit = {
+
+  def startGame(level: GameLevel): Unit = {
     currentLevel = level
-    updateBackground()
     game.startGame(level)
-  }
-
-  def startGame(): Unit = {
-    val gameBackgroundImagePath = currentLevel match {
-      case EasyLevel() => "assets/Easy.png"
-      case MediumLevel() => "assets/Medium.png"
-      case HardLevel() => "assets/Hard.png"
-    }
-    backgroundImageView.image = new Image(gameBackgroundImagePath)
-    game.startGame(currentLevel)
+    updateBackground()
     startTimer()
   }
 
@@ -69,16 +53,21 @@ class GameController {
         Thread.sleep(1000)
         game.decrementTimer()
       }
-      Platform.runLater(()=> endGame())
+      Platform.runLater(() => endGame())
     }).start()
   }
-  
-  private def endGame(): Unit = {
-    game.saveHistory()
+
+  private def updateBackground(): Unit = {
+    val gameBackgroundImagePath = currentLevel match {
+      case EasyLevel() => "assets/Easy.png"
+      case MediumLevel() => "assets/Medium.png"
+      case HardLevel() => "assets/Hard.png"
+    }
+    backgroundImageView.image = new Image(gameBackgroundImagePath)
   }
 
   def cellClicked(cellIndex: Int): Unit = {
-    val character: Character = generateRandomCharacter()
+    val character = generateRandomCharacter()
     character.applyEffect(game)
     updateUI()
   }
@@ -95,24 +84,28 @@ class GameController {
       }
     }.getOrElse(BrownMole())
   }
-  
+
+  private def handleKeyPress(event: KeyEvent): Unit = {
+    event.getCode match {
+      case KeyCode.DIGIT1 => cellClicked(0)
+      case KeyCode.DIGIT2 => cellClicked(1)
+      case KeyCode.DIGIT3 => cellClicked(2)
+      case KeyCode.DIGIT4 => cellClicked(3)
+      case KeyCode.DIGIT5 => cellClicked(4)
+      case KeyCode.DIGIT6 => cellClicked(5)
+      case KeyCode.DIGIT7 => cellClicked(6)
+      case KeyCode.DIGIT8 => cellClicked(7)
+      case KeyCode.DIGIT9 => cellClicked(8)
+      case _ => // Ignore
+    }
+  }
+
   private def updateUI(): Unit = {
     scoreLabel.text = f"Score: ${game.score}"
     timerLabel.text = f"Time: ${game.timer}"
   }
 
-  private def handleKeyPress(event: KeyEvent): Unit = {
-    event.getCode match {
-      case KeyCode.DIGIT1 => cellClicked(0) // top left
-      case KeyCode.DIGIT2 => cellClicked(1) // top center
-      case KeyCode.DIGIT3 => cellClicked(2) // top right
-      case KeyCode.DIGIT4 => cellClicked(3) // middle left
-      case KeyCode.DIGIT5 => cellClicked(4) // middle center
-      case KeyCode.DIGIT6 => cellClicked(5) // middle right
-      case KeyCode.DIGIT7 => cellClicked(6) // bottom left
-      case KeyCode.DIGIT8 => cellClicked(7) // bottom center
-      case KeyCode.DIGIT9 => cellClicked(8) // bottom right
-      case _ => // ignore
-    }
+  private def endGame(): Unit = {
+    game.saveHistory()
   }
 }
