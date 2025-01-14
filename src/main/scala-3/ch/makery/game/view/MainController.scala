@@ -12,38 +12,41 @@ class MainController {
   @FXML var rootPane: AnchorPane = _
   @FXML var playButton: Button = _
   @FXML var playIcon: AnchorPane = _
-  @FXML var levelButtons: Map[String, Button] = Map()
+  @FXML var easyButton: Button = _
+  @FXML var mediumButton: Button = _
+  @FXML var hardButton: Button = _
   @FXML var backgroundImageView: ImageView = _
   @FXML var titleLabel: Text = _
 
   private var currentLevel: GameLevel = EasyLevel()
 
   def initialize(): Unit = {
-    setupLevelButtons()
-    playButton.onAction = _ => startGame()
+    setInitialBackground()
+    setUpButtonActions()
   }
 
-  private def setupLevelButtons(): Unit = {
-    levelButtons("Easy").onAction = _ => selectLevel(EasyLevel())
-    levelButtons("Medium").onAction = _ => selectLevel(MediumLevel())
-    levelButtons("Hard").onAction = _ => selectLevel(HardLevel())
+  private def setInitialBackground(): Unit = {
+    backgroundImageView.setImage(new Image("assets/Easy 1.png"))
   }
-
-  private def selectLevel(level: GameLevel): Unit = {
+  
+  private def setUpButtonActions(): Unit = {
+    easyButton.setOnAction(_ => setLevel(EasyLevel()))
+    mediumButton.setOnAction(_ => setLevel(MediumLevel()))
+    hardButton.setOnAction(_ => setLevel(HardLevel()))
+    playButton.setOnAction(_ => startGame())
+  }
+  
+  private def setLevel(level: GameLevel): Unit = {
     currentLevel = level
-    updateBackground()
-  }
-
-  private def updateBackground(): Unit = {
-    val backgroundImagePath = currentLevel match {
+    val backgroundImagePath = level match {
       case EasyLevel() => "assets/Easy 1.png"
       case MediumLevel() => "assets/Medium 1.png"
       case HardLevel() => "assets/Hard 1.png"
     }
-    backgroundImageView.image = new Image(backgroundImagePath)
+    backgroundImageView.setImage(new Image(backgroundImagePath))
   }
 
   private def startGame(): Unit = {
-    // Navigate to GameView and pass the selected level
+    println(f"Starting game with level: $currentLevel")
   }
 }
