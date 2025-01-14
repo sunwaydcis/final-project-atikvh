@@ -1,4 +1,7 @@
 //22100259 Final Project Assignment
+package ch.makery.game
+
+import ch.makery.game.MainApp.{getClass, stage}
 import javafx.fxml.FXMLLoader
 import javafx.scene as jfxs
 import scalafx.Includes.*

@@ -1,9 +1,9 @@
 // 22100259 Final Project Assignment
-package ch.makery.game
+package ch.makery.game.view
 
 import javafx.fxml.FXML
-import scalafx.scene.layout.BorderPane
 import scalafx.scene.control.{Menu, MenuBar, MenuItem}
+import scalafx.scene.layout.BorderPane
 
 class RootController {
   @FXML var rootPane: BorderPane = _

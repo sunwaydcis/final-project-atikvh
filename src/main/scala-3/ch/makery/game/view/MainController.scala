@@ -1,5 +1,5 @@
 //22100250 Final Project Assignment
-package ch.makery.game
+package ch.makery.game.view
 
 import ch.makery.game.model.{EasyLevel, GameLevel, HardLevel, MediumLevel}
 import javafx.fxml.FXML

@@ -1,12 +1,12 @@
 // 22100259 Final Project Assignment
-package ch.makery.game
+package ch.makery.game.view
 
 import ch.makery.game.model.*
-import scalafx.application.Platform
 import javafx.fxml.FXML
+import javafx.scene.input.{KeyCode, KeyEvent}
+import scalafx.application.Platform
 import scalafx.scene.control.Label
 import scalafx.scene.image.{Image, ImageView}
-import javafx.scene.input.{KeyCode, KeyEvent}
 import scalafx.scene.layout.GridPane
 
 class GameController {
