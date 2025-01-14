@@ -87,15 +87,15 @@ class GameController {
 
   private def handleKeyPress(event: KeyEvent): Unit = {
     event.getCode match {
-      case KeyCode.DIGIT1 => cellClicked(0)
-      case KeyCode.DIGIT2 => cellClicked(1)
-      case KeyCode.DIGIT3 => cellClicked(2)
-      case KeyCode.DIGIT4 => cellClicked(3)
-      case KeyCode.DIGIT5 => cellClicked(4)
-      case KeyCode.DIGIT6 => cellClicked(5)
-      case KeyCode.DIGIT7 => cellClicked(6)
-      case KeyCode.DIGIT8 => cellClicked(7)
-      case KeyCode.DIGIT9 => cellClicked(8)
+      case KeyCode.Q => cellClicked(0)
+      case KeyCode.W => cellClicked(1)
+      case KeyCode.E => cellClicked(2)
+      case KeyCode.A => cellClicked(3)
+      case KeyCode.S => cellClicked(4)
+      case KeyCode.D => cellClicked(5)
+      case KeyCode.Z => cellClicked(6)
+      case KeyCode.X => cellClicked(7)
+      case KeyCode.C => cellClicked(8)
       case _ => // Ignore
     }
   }
