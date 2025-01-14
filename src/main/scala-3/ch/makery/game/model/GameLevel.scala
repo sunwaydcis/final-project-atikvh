@@ -5,7 +5,7 @@ abstract class GameLevel(
                           val name: String,
                           val initialTimer: Int,
                           val characterProbability: Map[String, Int],
-                          val backgroundImagePath: String)
+                          val speed: Int)
 
 case class EasyLevel() extends GameLevel(
   name = "Easy",
@@ -13,7 +13,7 @@ case class EasyLevel() extends GameLevel(
   characterProbability = Map(
     "Brown Mole" -> 100
   ),
-  backgroundImagePath = "/ch/makery/game/assets/Easy.png"
+  speed = 1000 //milliseconds
 )
 
 case class MediumLevel() extends GameLevel(
@@ -23,7 +23,7 @@ case class MediumLevel() extends GameLevel(
     "Brown Mole" -> 70,
     "Bomb" -> 30
   ),
-  backgroundImagePath = "/ch/makery/game/assets/Medium.png"
+  speed = 800 
 )
 
 case class HardLevel() extends GameLevel(
@@ -35,5 +35,5 @@ case class HardLevel() extends GameLevel(
     "Grey Mole" -> 15,
     "Bomb" -> 10
   ),
-  backgroundImagePath = "/ch/makery/game/assets/Hard.png"
+  speed = 500
 )

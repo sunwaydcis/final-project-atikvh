@@ -7,9 +7,10 @@ import javafx.scene.input.{KeyCode, KeyEvent}
 import scalafx.application.Platform
 import scalafx.scene.control.Label
 import scalafx.scene.image.{Image, ImageView}
-import scalafx.scene.layout.GridPane
+import scalafx.scene.layout.{AnchorPane, GridPane}
 
 class GameController {
+  @FXML var rootPane: AnchorPane =_
   @FXML var scoreLabel: Label = _
   @FXML var timerLabel: Label = _
   @FXML var cellGrid: GridPane = _
@@ -17,7 +18,7 @@ class GameController {
 
   private var game: Game = new Game()
   private var currentLevel: GameLevel = EasyLevel()
-  private val cells: Array[GameCell] = Array.ofDim(9)
+  private val cells: Array[GameCell] =_
 
   def initialize(): Unit = {
     setupGrid()
@@ -25,18 +26,13 @@ class GameController {
   }
 
   private def setupGrid(): Unit = {
-    cellGrid.getChildren.clear()
+    cells = Array.ofDimd.getChildren.clear()
     for (i <- 0 until 9) {
       val cell = new GameCell()
       cells(i) = cell
-      cellGrid.add(cell, i % 3, i / 3)
-      cell.onClick = () => cellClicked(i)
+      cellGrid.add(cell.getPane, i % 3, i / 3)
+      
     }
-    cellGrid.sceneProperty().addListener((_, _, newScene) => {
-      if (newScene != null) {
-        newScene.addEventHandler(KeyEvent.KEY_PRESSED, (event: KeyEvent) => handleKeyPress(event))
-      }
-    })
   }
 
   def startGame(level: GameLevel): Unit = {

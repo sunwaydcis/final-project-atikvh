@@ -5,16 +5,17 @@ import scala.collection.mutable
 import java.time.LocalDateTime
 
 class Game {
-  private var _score: Int = 0 // Change when the game is started
-  private var _timer: Int = 180 // Default timer is 3 minutes - also change
-  private var _level: GameLevel = EasyLevel() // Change according to player's choice
+  private var _score: Int = 0
+  private var _timer: Int = 180 
+  private var _level: GameLevel = EasyLevel() 
   private val _history: mutable.ListBuffer[GameHistory] = mutable.ListBuffer()
-
-  // Accessor
+  private var _speed: Int = _level.speed
+  
   def score: Int = _score
   def timer: Int = _timer
   def level: GameLevel = _level
   def history: Seq[GameHistory] = _history.toSeq // Immutable history view
+  
 
   def startGame(level: GameLevel): Unit = {
     _level = level
