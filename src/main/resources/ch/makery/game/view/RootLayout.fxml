@@ -7,26 +7,26 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.game.RootController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
-          <Menu mnemonicParsing="false" text="Menu">
+          <Menu fx:id="menu" mnemonicParsing="false" text="Menu">
             <items>
-              <MenuItem mnemonicParsing="false" text="Pause" />
-                  <MenuItem mnemonicParsing="false" text="Restart" />
-                  <MenuItem mnemonicParsing="false" text="End" />
-                  <MenuItem mnemonicParsing="false" text="Play Again" />
+              <MenuItem fx:id="pauseOpt" mnemonicParsing="false" text="Pause" />
+                  <MenuItem fx:id="playOpt" mnemonicParsing="false" text="Restart" />
+                  <MenuItem fx:id="endOpt" mnemonicParsing="false" text="End" />
+                  <MenuItem fx:id="playAgainOpt" mnemonicParsing="false" text="Play Again" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="History">
+          <Menu fx:id="history" mnemonicParsing="false" text="History">
             <items>
-              <MenuItem mnemonicParsing="false" text="View" />
+              <MenuItem fx:id="viewHistory" mnemonicParsing="false" text="View" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Tutorial">
+          <Menu fx:id="tutorial" mnemonicParsing="false" text="Tutorial">
             <items>
-              <MenuItem mnemonicParsing="false" text="Characters">
+              <MenuItem fx:id="character" mnemonicParsing="false" text="Characters">
                      <graphic>
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -34,7 +34,7 @@
                            </image>
                         </ImageView>
                      </graphic></MenuItem>
-                  <MenuItem mnemonicParsing="false" text="How to play">
+                  <MenuItem fx:id="howTo" mnemonicParsing="false" text="How to play">
                      <graphic>
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>

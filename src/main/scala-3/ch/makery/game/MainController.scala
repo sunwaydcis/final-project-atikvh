@@ -3,14 +3,18 @@ package ch.makery.game
 
 import ch.makery.game.model.{EasyLevel, GameLevel, HardLevel, MediumLevel}
 import javafx.fxml.FXML
-import scalafx.scene.control.{Button, Label}
+import scalafx.scene.control.Button
 import scalafx.scene.image.{Image, ImageView}
+import scalafx.scene.layout.AnchorPane
+import scalafx.scene.text.Text
 
 class MainController {
+  @FXML var rootPane: AnchorPane = _
   @FXML var playButton: Button = _
+  @FXML var playIcon: AnchorPane = _
   @FXML var levelButtons: Map[String, Button] = Map()
   @FXML var backgroundImageView: ImageView = _
-  @FXML var titleLabel: Label = _
+  @FXML var titleLabel: Text = _
 
   private var currentLevel: GameLevel = EasyLevel()
 

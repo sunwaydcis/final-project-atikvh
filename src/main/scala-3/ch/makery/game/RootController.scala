@@ -2,12 +2,23 @@
 package ch.makery.game
 
 import javafx.fxml.FXML
-import scalafx.scene.layout.AnchorPane
-import scalafx.scene.control.MenuBar
+import scalafx.scene.layout.BorderPane
+import scalafx.scene.control.{Menu, MenuBar, MenuItem}
 
 class RootController {
-  @FXML var rootPane: AnchorPane = _
+  @FXML var rootPane: BorderPane = _
   @FXML var menuBar: MenuBar = _
+  @FXML var menu: Menu = _
+  @FXML var playOpt: MenuItem = _
+  @FXML var pauseOpt: MenuItem = _
+  @FXML var endOpt: MenuItem = _
+  @FXML var playAgainOpt: MenuItem = _
+  @FXML var history: Menu = _
+  @FXML var viewHistory: MenuItem = _
+  @FXML var tutorial: Menu = _
+  @FXML var character: MenuItem = _
+  @FXML var howTo: MenuItem = _
+  
 
   def initialize(): Unit = {
     // Initialize menu actions
@@ -15,7 +26,7 @@ class RootController {
   }
 
   private def setupMenuActions(): Unit = {
-    // Bind menu items (e.g., Pause, Restart, etc.)
+    
   }
 
   def navigateToMain(): Unit = {
@@ -25,8 +36,5 @@ class RootController {
   def navigateToGame(): Unit = {
     // Logic to switch to GameView
   }
-
-  def navigateToTutorial(): Unit = {
-    // Logic to switch to TutorialView
-  }
+  
 }
