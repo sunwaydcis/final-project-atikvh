@@ -3,8 +3,6 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 
 <BorderPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.game.view.RootController">
@@ -18,14 +16,7 @@
           </Menu>
           <Menu fx:id="tutorial" mnemonicParsing="false" text="Tutorial">
             <items>
-                  <MenuItem fx:id="howTo" mnemonicParsing="false" text="How to play">
-                     <graphic>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../assets/Tutorial.png" />
-                           </image>
-                        </ImageView>
-                     </graphic></MenuItem>
+                  <MenuItem fx:id="howTo" mnemonicParsing="false" text="How to play"/>
             </items>
           </Menu>
         </menus>

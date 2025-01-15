@@ -3,8 +3,6 @@ package ch.makery.game.model
 
 import ch.makery.game.util.Database
 import scalikejdbc.*
-import ch.makery.game.model.GameLevel
-import scala.collection.mutable
 import java.time.LocalDateTime
 import java.sql.*
 
