@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="ch.makery.game.view.HistoryController">
+    <TableView fx:id="historyTable" layoutX="20.0" layoutY="20.0" prefHeight="400.0" prefWidth="500.0">
+        <columns>
+            <TableColumn fx:id="dateColumn" text="Date/Time" />
+            <TableColumn fx:id="levelColumn" text="Level" />
+            <TableColumn fx:id="scoreColumn" text="Score" />
+        </columns>
+    </TableView>
+</AnchorPane>
