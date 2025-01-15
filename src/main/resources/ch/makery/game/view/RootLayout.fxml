@@ -11,14 +11,6 @@
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
-          <Menu fx:id="menu" mnemonicParsing="false" text="Menu">
-            <items>
-              <MenuItem fx:id="pauseOpt" mnemonicParsing="false" text="Pause" />
-                  <MenuItem fx:id="playOpt" mnemonicParsing="false" text="Restart" />
-                  <MenuItem fx:id="endOpt" mnemonicParsing="false" text="End" />
-                  <MenuItem fx:id="playAgainOpt" mnemonicParsing="false" text="Play Again" />
-            </items>
-          </Menu>
           <Menu fx:id="history" mnemonicParsing="false" text="History">
             <items>
               <MenuItem fx:id="viewHistory" mnemonicParsing="false" text="View" />
@@ -26,14 +18,6 @@
           </Menu>
           <Menu fx:id="tutorial" mnemonicParsing="false" text="Tutorial">
             <items>
-              <MenuItem fx:id="character" mnemonicParsing="false" text="Characters">
-                     <graphic>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../assets/Characters.png" />
-                           </image>
-                        </ImageView>
-                     </graphic></MenuItem>
                   <MenuItem fx:id="howTo" mnemonicParsing="false" text="How to play">
                      <graphic>
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
