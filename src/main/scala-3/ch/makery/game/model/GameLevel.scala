@@ -44,6 +44,6 @@ object GameLevel {
     case "Easy"   => EasyLevel()
     case "Medium" => MediumLevel()
     case "Hard"   => HardLevel()
-    case _        => EasyLevel() // Default 
+    case _        => EasyLevel()
   }
 }
