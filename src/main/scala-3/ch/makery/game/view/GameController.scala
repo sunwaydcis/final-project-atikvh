@@ -1,16 +1,16 @@
-// 22100259 Final Project Assignment
 package ch.makery.game.view
 
-import ch.makery.game.model.*
+import ch.makery.game.model.{Character, Game, GameLevel, EasyLevel}
 import javafx.fxml.FXML
-import javafx.scene.input.{KeyCode, KeyEvent}
+import javafx.scene.input.{KeyCode, KeyEvent, MouseEvent}
 import scalafx.application.Platform
 import scalafx.scene.control.Label
 import scalafx.scene.image.{Image, ImageView}
 import scalafx.scene.layout.{AnchorPane, GridPane, Pane}
+import java.time.LocalDateTime
 
 class GameController {
-  @FXML var rootPane: AnchorPane =_
+  @FXML var rootPane: AnchorPane = _
   @FXML var scoreLabel: Label = _
   @FXML var timerLabel: Label = _
   @FXML var cellGrid: GridPane = _
@@ -34,12 +34,17 @@ class GameController {
   @FXML var cellImage7: ImageView = _
   @FXML var cellImage8: ImageView = _
 
+  private val cellImages = Array(
+    cellImage0, cellImage1, cellImage2, cellImage3,
+    cellImage4, cellImage5, cellImage6, cellImage7, cellImage8
+  )
 
-  private var game: Game = new Game()
+  private val game = new Game()
   private var currentLevel: GameLevel = EasyLevel()
 
   def initialize(): Unit = {
     startGame(currentLevel)
+    attachTapHandlers()
   }
 
   def startGame(level: GameLevel): Unit = {
@@ -47,30 +52,49 @@ class GameController {
     game.startGame(level)
     updateBackground()
     game.startGameLoop()
+
+    // Update UI periodically on a separate thread
+    new Thread(() => {
+      while (!game.isGameOver) {
+        Platform.runLater(updateUI())
+        Thread.sleep(500)
+      }
+
+      // Save game result to the database after game over
+      Platform.runLater(() => {
+        Game.saveGameToDatabase(LocalDateTime.now(), currentLevel.name, game.score)
+        updateUI()
+      })
+    }).start()
   }
 
   private def updateBackground(): Unit = {
-    val gameBackgroundImagePath = currentLevel match {
-      case EasyLevel() => "assets/Easy.png"
-      case MediumLevel() => "assets/Medium.png"
-      case HardLevel() => "assets/Hard.png"
-    }
-    backgroundImageView.image = new Image(gameBackgroundImagePath)
+    backgroundImageView.image = new Image(currentLevel.imagePath)
   }
 
   def cellClicked(cellIndex: Int): Unit = {
-    val character: Character = game.generateRandomCharacter()
+    val character = game.generateRandomCharacter()
     placeCharInCell(character, cellIndex)
     character.applyEffect(game)
     updateUI()
   }
-  
-  private def placeCharInCell(character: Character, cellIndex: Int): Unit = {
-    val characterImage = cellImages(cellIndex)
-    characterImage.image = new Image(character.imagePath)
+
+  private def attachTapHandlers(): Unit = {
+    cellImages.zipWithIndex.foreach { case (imageView, index) =>
+      imageView.onMouseClicked = (_: MouseEvent) => {
+        cellClicked(index)
+      }
+    }
   }
 
-  private def handleKeyPress(event: KeyEvent): Unit = {
+  private def placeCharInCell(character: Character, cellIndex: Int): Unit = {
+    val characterImage = cellImages(cellIndex)
+    Platform.runLater {
+      characterImage.setImage(new Image(character.imagePath))
+    }
+  }
+
+  def handleKeyPress(event: KeyEvent): Unit = {
     event.getCode match {
       case KeyCode.Q => cellClicked(0)
       case KeyCode.W => cellClicked(1)
@@ -81,11 +105,15 @@ class GameController {
       case KeyCode.Z => cellClicked(6)
       case KeyCode.X => cellClicked(7)
       case KeyCode.C => cellClicked(8)
-      case _ => 
+      case _ => // Do nothing for unrecognized keys
     }
   }
 
   private def updateUI(): Unit = {
     scoreLabel.text = f"Score: ${game.score}"
     timerLabel.text = f"Time: ${game.timer}"
+    if (game.isGameOver) {
+      timerLabel.text = "Game Over!"
+    }
   }
+}
