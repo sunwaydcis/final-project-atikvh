@@ -50,7 +50,7 @@ class Game {
   def startGameLoop(): Unit = {
     new Thread(()=> {
       while (!isGameOver) {
-        spawnCharacter()
+        generateRandomCharacter()
         Thread.sleep(_speed)
       }
     }).start()
@@ -62,9 +62,6 @@ class Game {
     }).start()
   }
   
-  private def spawnCharacter(): Unit = {
-    val character = generateRandomCharacter()
-  }
   
   def generateRandomCharacter(): Character = {
     val randomValue = scala.util.Random.nextInt(100)

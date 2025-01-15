@@ -36,5 +36,5 @@ case class HardLevel() extends GameLevel(
     "Bomb" -> 10
   ),
   speed = 500,
-  imagePath = "assets/Easy.png"
+  imagePath = "assets/Hard.png"
 )

@@ -48,5 +48,6 @@ class MainController {
 
   private def startGame(): Unit = {
     println(f"Starting game with level: $currentLevel")
+    //initialize game - provide code here
   }
 }

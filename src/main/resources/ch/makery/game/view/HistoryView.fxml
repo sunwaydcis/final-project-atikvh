@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="ch.makery.game.view.HistoryController">
-    <TableView fx:id="historyTable" layoutX="20.0" layoutY="20.0" prefHeight="400.0" prefWidth="500.0">
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.StackPane?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.game.view.HistoryController">
+   <children>
+      <TableView fx:id="gameHistory" prefHeight="200.0" prefWidth="200.0">
         <columns>
-            <TableColumn fx:id="dateColumn" text="Date/Time" />
-            <TableColumn fx:id="levelColumn" text="Level" />
-            <TableColumn fx:id="scoreColumn" text="Score" />
+          <TableColumn fx:id="ID" prefWidth="70.0" text="ID" />
+          <TableColumn fx:id="DateTime" prefWidth="300.0" text="DateTime" />
+            <TableColumn fx:id="Level" prefWidth="290.0" text="Level" />
+            <TableColumn fx:id="Score" prefWidth="300.0" text="Score" />
         </columns>
-    </TableView>
-</AnchorPane>
+      </TableView>
+   </children>
+</StackPane>

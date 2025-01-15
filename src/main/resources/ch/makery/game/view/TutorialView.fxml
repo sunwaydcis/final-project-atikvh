@@ -5,19 +5,18 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
 
-
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.game.view.TutorialController">
    <children>
-      <BorderPane prefHeight="200.0" prefWidth="200.0">
+      <BorderPane fx:id="border" prefHeight="200.0" prefWidth="200.0">
          <left>
-            <ImageView fitHeight="400.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+            <ImageView fx:id="character" fitHeight="400.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                <image>
                   <Image url="@../assets/Characters.png" />
                </image>
             </ImageView>
          </left>
          <right>
-            <ImageView fitHeight="400.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+            <ImageView fx:id="tutorial" fitHeight="400.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                <image>
                   <Image url="@../assets/Tutorial.png" />
                </image>
