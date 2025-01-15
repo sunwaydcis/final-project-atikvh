@@ -82,6 +82,10 @@ class Game {
       }
     }.getOrElse(new BrownMole())
   }
+  
+  def initializeTable(): Unit = {
+    
+  }
 }
 
 case class GameHistory(dateTime: java.time.LocalDateTime, level: String, score: Int)

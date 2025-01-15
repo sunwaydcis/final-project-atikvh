@@ -41,7 +41,7 @@ class GameController {
   def initialize(): Unit = {
     startGame(currentLevel)
   }
-  
+
   def startGame(level: GameLevel): Unit = {
     currentLevel = level
     game.startGame(level)
@@ -89,10 +89,3 @@ class GameController {
     scoreLabel.text = f"Score: ${game.score}"
     timerLabel.text = f"Time: ${game.timer}"
   }
-
-  private def endGame(): Unit = {
-    if (game.isGameOver){
-      game.saveHistory()
-    }
-  }
-}
