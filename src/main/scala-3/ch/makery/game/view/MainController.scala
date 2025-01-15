@@ -11,7 +11,6 @@ import scalafx.scene.text.Text
 class MainController {
   @FXML var rootPane: AnchorPane = _
   @FXML var playButton: Button = _
-  @FXML var playIcon: AnchorPane = _
   @FXML var easyButton: Button = _
   @FXML var mediumButton: Button = _
   @FXML var hardButton: Button = _
@@ -48,6 +47,7 @@ class MainController {
 
   private def startGame(): Unit = {
     println(f"Starting game with level: $currentLevel")
-    //initialize game - provide code here
+    val gameController = new GameController()
+    gameController.startGame(currentLevel)
   }
 }
