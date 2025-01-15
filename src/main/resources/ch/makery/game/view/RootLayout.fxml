@@ -9,16 +9,12 @@
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
-          <Menu fx:id="history" mnemonicParsing="false" text="History">
-            <items>
-              <MenuItem fx:id="viewHistory" mnemonicParsing="false" text="View" />
-            </items>
-          </Menu>
-          <Menu fx:id="tutorial" mnemonicParsing="false" text="Tutorial">
-            <items>
-                  <MenuItem fx:id="howTo" mnemonicParsing="false" text="How to play"/>
-            </items>
-          </Menu>
+            <Menu fx:id="history" mnemonicParsing="false" text="History">
+                <MenuItem fx:id="viewHistory" mnemonicParsing="false" text="View" />
+            </Menu>
+            <Menu fx:id="tutorial" mnemonicParsing="false" text="Tutorial">
+                <MenuItem fx:id="howTo" mnemonicParsing="false" text="How to play" />
+            </Menu>
         </menus>
       </MenuBar>
    </top>

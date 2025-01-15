@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.effect.ColorInput?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -30,75 +29,48 @@
          </effect>
          <children>
             <Pane fx:id="cell0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="120.0" prefWidth="120.0">
-               <effect>
-                  <ColorInput height="115.0" paint="#563310" width="115.0" />
-               </effect>
                <children>
                   <ImageView fx:id="cellImage0" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <Pane fx:id="cell1" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="120.0" prefWidth="120.0" GridPane.columnIndex="1">
-               <effect>
-                  <ColorInput height="115.0" paint="#563310" width="115.0" />
-               </effect>
                <children>
                   <ImageView fx:id="cellImage1" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <Pane fx:id="cell2" layoutX="130.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="120.0" prefWidth="120.0" GridPane.columnIndex="2">
-               <effect>
-                  <ColorInput height="115.0" paint="#563310" width="115.0" />
-               </effect>
                <children>
-                  <ImageView fx:id="cellImage2" fitHeight="120.0" fitWidth="120.0" layoutX="-16.0" layoutY="-27.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="cellImage2" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <Pane fx:id="cell3" layoutX="250.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="120.0" prefWidth="120.0" GridPane.rowIndex="1">
-               <effect>
-                  <ColorInput height="115.0" paint="#563310" width="115.0" />
-               </effect>
                <children>
-                  <ImageView fx:id="cellImage3" fitHeight="120.0" fitWidth="120.0" layoutX="25.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="cellImage3" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <Pane fx:id="cell4" layoutX="10.0" layoutY="131.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="120.0" prefWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <effect>
-                  <ColorInput height="115.0" paint="#563310" width="115.0" />
-               </effect>
                <children>
-                  <ImageView fx:id="cellImage4" fitHeight="120.0" fitWidth="120.0" layoutX="13.0" layoutY="-21.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="cellImage4" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <Pane fx:id="cell5" layoutX="130.0" layoutY="131.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="120.0" prefWidth="120.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
-               <effect>
-                  <ColorInput height="115.0" paint="#563310" width="115.0" />
-               </effect>
                <children>
-                  <ImageView fx:id="cellImage5" fitHeight="120.0" fitWidth="120.0" layoutX="5.0" layoutY="-33.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="cellImage5" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <Pane fx:id="cell6" layoutX="250.0" layoutY="131.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="120.0" prefWidth="120.0" GridPane.rowIndex="2">
-               <effect>
-                  <ColorInput height="115.0" paint="#563310" width="115.0" />
-               </effect>
                <children>
-                  <ImageView fx:id="cellImage6" fitHeight="120.0" fitWidth="120.0" layoutY="-41.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="cellImage6" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <Pane fx:id="cell7" layoutX="10.0" layoutY="251.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="120.0" prefWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <effect>
-                  <ColorInput height="115.0" paint="#563310" width="115.0" />
-               </effect>
                <children>
-                  <ImageView fx:id="cellImage7" fitHeight="120.0" fitWidth="120.0" layoutX="-11.0" layoutY="-53.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="cellImage7" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <Pane fx:id="cell8" layoutX="130.0" layoutY="251.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="120.0" prefWidth="120.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
-               <effect>
-                  <ColorInput height="115.0" paint="#563310" width="115.0" />
-               </effect>
                <children>
-                  <ImageView fx:id="cellImage8" fitHeight="120.0" fitWidth="120.0" layoutX="-8.0" layoutY="-33.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="cellImage8" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
          </children>
