@@ -13,7 +13,7 @@ object MainApp extends JFXApp3 {
   var roots: Option[BorderPane] = None
 
   override def start(): Unit = {
-    val rootResource = getClass.getResource("view/RootLayout.fxml")
+    val rootResource = getClass.getResource("src/main/resources/ch/makery/game/view/RootLayout.fxml")
     val loader = new FXMLLoader(rootResource)
     loader.load()
 

@@ -24,13 +24,13 @@ class RootController {
   }
   
   private def showHistory(): Unit = {
-    val loader = new FXMLLoader(getClass.getResource("/path/to/HistoryView.fxml"))
+    val loader = new FXMLLoader(getClass.getResource("/ch/makery/game/view/HistoryView.fxml"))
     val historyView = loader.load[StackPane]()
     rootPane.center = historyView
   }
   
   private def showTutorial(): Unit = {
-    val loader = new FXMLLoader(getClass.getResource("/path/to/TutorialView.fxml"))
+    val loader = new FXMLLoader(getClass.getResource("/ch/makery/game/view/TutorialView.fxml"))
     val tutorialView = loader.load[StackPane]()
     rootPane.center = tutorialView
   }

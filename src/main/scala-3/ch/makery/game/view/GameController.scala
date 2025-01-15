@@ -1,13 +1,17 @@
+//22100259 Final Assignment Project
 package ch.makery.game.view
 
-import ch.makery.game.model.{Character, Game, GameLevel, EasyLevel}
+import ch.makery.game.model.{Character, EasyLevel, Game, GameLevel}
 import javafx.fxml.FXML
 import javafx.scene.input.{KeyCode, KeyEvent, MouseEvent}
 import scalafx.application.Platform
 import scalafx.scene.control.Label
 import scalafx.scene.image.{Image, ImageView}
 import scalafx.scene.layout.{AnchorPane, GridPane, Pane}
+
 import java.time.LocalDateTime
+import java.util.concurrent.Executors
+import scala.concurrent.{ExecutionContext, Future}
 
 class GameController {
   @FXML var rootPane: AnchorPane = _
@@ -41,6 +45,7 @@ class GameController {
 
   private val game = new Game()
   private var currentLevel: GameLevel = EasyLevel()
+  private implicit val ec: ExecutionContext = ExecutionContext.fromExecutor(Executors.newCachedThreadPool())
 
   def initialize(): Unit = {
     startGame(currentLevel)
@@ -53,19 +58,17 @@ class GameController {
     updateBackground()
     game.startGameLoop()
 
-    // Update UI periodically on a separate thread
-    new Thread(() => {
+    Future {
       while (!game.isGameOver) {
         Platform.runLater(updateUI())
         Thread.sleep(500)
       }
 
-      // Save game result to the database after game over
       Platform.runLater(() => {
         Game.saveGameToDatabase(LocalDateTime.now(), currentLevel.name, game.score)
         updateUI()
       })
-    }).start()
+    }
   }
 
   private def updateBackground(): Unit = {
@@ -73,10 +76,12 @@ class GameController {
   }
 
   def cellClicked(cellIndex: Int): Unit = {
-    val character = game.generateRandomCharacter()
-    placeCharInCell(character, cellIndex)
-    character.applyEffect(game)
-    updateUI()
+    val character = game.generateRandomCharacterAtCell(cellIndex)
+    if (character.isDefined) {
+      character.get.applyEffect(game)
+      removeCharacterFromCell(cellIndex)
+      updateUI()
+    }
   }
 
   private def attachTapHandlers(): Unit = {
@@ -87,10 +92,34 @@ class GameController {
     }
   }
 
+  def spawnCharacterAtRandomCell(): Unit = {
+    val randomCell = scala.util.Random.nextInt(cellImages.length)
+    val character = game.generateRandomCharacter()
+    placeCharInCell(character, randomCell)
+
+    // Remove the character after a timeout if not clicked
+    Future {
+      Thread.sleep(currentLevel.speed)
+      if (game.getCurrentCharacterAtCell(randomCell).contains(character)) {
+        removeCharacterFromCell(randomCell)
+        Platform.runLater(updateUI())
+      }
+    }
+  }
+
   private def placeCharInCell(character: Character, cellIndex: Int): Unit = {
     val characterImage = cellImages(cellIndex)
+    game.placeCharacterInCell(character, cellIndex)
     Platform.runLater {
       characterImage.setImage(new Image(character.imagePath))
+    }
+  }
+
+  private def removeCharacterFromCell(cellIndex: Int): Unit = {
+    val characterImage = cellImages(cellIndex)
+    game.removeCharacterFromCell(cellIndex)
+    Platform.runLater {
+      characterImage.setImage(null)
     }
   }
 
@@ -105,7 +134,7 @@ class GameController {
       case KeyCode.Z => cellClicked(6)
       case KeyCode.X => cellClicked(7)
       case KeyCode.C => cellClicked(8)
-      case _ => // Do nothing for unrecognized keys
+      case _ => // ignore
     }
   }
 

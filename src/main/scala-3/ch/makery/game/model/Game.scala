@@ -4,13 +4,14 @@ package ch.makery.game.model
 import ch.makery.game.util.Database
 import scalikejdbc.*
 import java.time.LocalDateTime
-import java.sql.*
+import scala.collection.mutable
 
 class Game(
             private var _score: Int = 0,
             private var _timer: Int = 180,
             private var _level: GameLevel = EasyLevel()
           ) {
+  private val cellCharacters: mutable.Map[Int, Character] = mutable.Map()
   def score: Int = _score
   def timer: Int = _timer
   def level: GameLevel = _level
@@ -36,27 +37,40 @@ class Game(
 
   def isGameOver: Boolean = _timer == 0
 
-
-  def reset(): Unit = {
-    _score = 0
-    _timer = _level.initialTimer
+  def onCharacterHit(character: Character): Unit = {
+    character.applyEffect(this)
   }
-  
+
   def startGameLoop(): Unit = {
-    new Thread(()=> {
-      while (!isGameOver) {
-        generateRandomCharacter()
+    new Thread(() => {
+      while (_timer > 0) {
+        val randomCell = scala.util.Random.nextInt(9)
+        val character = generateRandomCharacter()
+        placeCharacterInCell(character, randomCell)
+
         Thread.sleep(_level.speed)
+
+        if (cellCharacters.contains(randomCell)) {
+          cellCharacters.remove(randomCell)
+        }
       }
     }).start()
-    new Thread(()=> {
-      while(!isGameOver) {
+
+    new Thread(() => {
+      while (_timer > 0) {
         Thread.sleep(1000)
         decrementTimer()
       }
     }).start()
   }
 
+  def placeCharacterInCell(character: Character, cellIndex: Int): Unit = {
+    cellCharacters(cellIndex) = character
+  }
+
+  def removeCharacterFromCell(cellIndex: Int): Unit = {
+    cellCharacters.remove(cellIndex)
+  }
   
   def generateRandomCharacter(): Character = {
     val randomValue = scala.util.Random.nextInt(100)
@@ -68,6 +82,16 @@ class Game(
         case "Bomb" => new Bomb()
       }
     }.getOrElse(new BrownMole())
+  }
+
+  def generateRandomCharacterAtCell(cellIndex: Int): Option[Character] = {
+    val character = generateRandomCharacter()
+    placeCharacterInCell(character, cellIndex)
+    Some(character)
+  }
+
+  def getCurrentCharacterAtCell(cellIndex: Int): Option[Character] = {
+    cellCharacters.get(cellIndex)
   }
 }
 
