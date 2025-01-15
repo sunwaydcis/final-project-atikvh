@@ -38,3 +38,12 @@ case class HardLevel() extends GameLevel(
   speed = 500,
   imagePath = "assets/Hard.png"
 )
+
+object GameLevel {
+  def fromString(level: String): GameLevel = level match {
+    case "Easy"   => EasyLevel()
+    case "Medium" => MediumLevel()
+    case "Hard"   => HardLevel()
+    case _        => EasyLevel() // Default 
+  }
+}

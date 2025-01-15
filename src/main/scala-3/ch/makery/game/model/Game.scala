@@ -8,22 +8,19 @@ import scala.collection.mutable
 import java.time.LocalDateTime
 import java.sql.*
 
-class Game {
-  private var _score: Int = 0
-  private var _timer: Int = 180 
-  private var _level: GameLevel = EasyLevel()
-  private var _speed: Int = _level.speed
-  
+class Game(
+            private var _score: Int = 0,
+            private var _timer: Int = 180,
+            private var _level: GameLevel = EasyLevel()
+          ) {
   def score: Int = _score
   def timer: Int = _timer
   def level: GameLevel = _level
-  def speed: Int = _speed
 
   def startGame(level: GameLevel): Unit = {
     _level = level
     _score = 0
     _timer = _level.initialTimer
-    _speed = _level.speed
     startGameLoop()
   }
 
@@ -51,7 +48,7 @@ class Game {
     new Thread(()=> {
       while (!isGameOver) {
         generateRandomCharacter()
-        Thread.sleep(_speed)
+        Thread.sleep(_level.speed)
       }
     }).start()
     new Thread(()=> {
@@ -61,7 +58,7 @@ class Game {
       }
     }).start()
   }
-  
+
   
   def generateRandomCharacter(): Character = {
     val randomValue = scala.util.Random.nextInt(100)
@@ -76,31 +73,40 @@ class Game {
   }
 }
 
-object Game extends Database{
-  def apply(dateTime: LocalDateTime, levelS: GameLevel, scoreS: Int): Game =
-    new Game(scoreS, levelS.initialTimer, levelS, levelS.speed, dateTime)
+object Game extends Database {
+  def apply(dateTime: LocalDateTime, levelS: String, scoreS: Int): Game =
+    new Game(scoreS, 0, GameLevel.fromString(levelS))
 
-  def initializeTable() = Unit 
+  def initializeTable(): Unit = {
     DB autoCommit { implicit session =>
       sql"""
-          CREATE TABLE game (
-          id int NOT NULL GENERATED ALWAYS AS IDENTITY
-          (START WITH 1, INCREMENT BY 1),
-          dateTime timestamp,
-          level varchar(5),
-          score int
+          CREATE TABLE gameHistory (
+            id INT NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+            dateTime TIMESTAMP NOT NULL,
+            level VARCHAR(10) NOT NULL,
+            score INT NOT NULL
           )
           """.execute.apply()
     }
-  
-  
-  def getAllGames: List[Game] = {
+  }
+
+  def saveGameToDatabase(dateTime: LocalDateTime, level: String, score: Int): Unit = {
+    DB autoCommit { implicit session =>
+      sql"""
+          INSERT INTO gameHistory (dateTime, level, score)
+          VALUES (${dateTime}, ${level}, ${score})
+          """.update.apply()
+    }
+  }
+
+  def getAllGamesWithId: List[(Int, LocalDateTime, String, Int)] = {
     DB readOnly { implicit session =>
-      sql"SELECT * FROM game".map(rs => Game(
+      sql"SELECT id, dateTime, level, score FROM game".map(rs => (
+        rs.int("id"),
         rs.localDateTime("dateTime"),
-        GameLevel.fromString(rs.string("level")),
-        rs.int("Score")
+        rs.string("level"),
+        rs.int("score")
       )).list.apply()
     }
-  } 
+  }
 }
