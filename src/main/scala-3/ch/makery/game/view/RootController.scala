@@ -1,9 +1,9 @@
 // 22100259 Final Project Assignment
 package ch.makery.game.view
 
-import javafx.fxml.FXML
+import javafx.fxml.{FXML, FXMLLoader}
 import scalafx.scene.control.{Menu, MenuBar, MenuItem}
-import scalafx.scene.layout.BorderPane
+import scalafx.scene.layout.{BorderPane, StackPane}
 
 class RootController {
   @FXML var rootPane: BorderPane = _
@@ -12,21 +12,26 @@ class RootController {
   @FXML var viewHistory: MenuItem = _
   @FXML var tutorial: Menu = _
   @FXML var howTo: MenuItem = _
-  
+
 
   def initialize(): Unit = {
     setupMenuActions()
   }
 
   private def setupMenuActions(): Unit = {
-    
+    viewHistory.setOnAction(_=> showHistory())
+    howTo.setOnAction(_=> showTutorial())
   }
   
   private def showHistory(): Unit = {
-    //open History upon 'view history' menuitem chosen in history
+    val loader = new FXMLLoader(getClass.getResource("/path/to/HistoryView.fxml"))
+    val historyView = loader.load[StackPane]()
+    rootPane.center = historyView
   }
   
-  private def showTutorial(imagePath: String): Unit = {
-    //open howTo upon 'how to play' menuitem chosen in tutorial
+  private def showTutorial(): Unit = {
+    val loader = new FXMLLoader(getClass.getResource("/path/to/TutorialView.fxml"))
+    val tutorialView = loader.load[StackPane]()
+    rootPane.center = tutorialView
   }
 }

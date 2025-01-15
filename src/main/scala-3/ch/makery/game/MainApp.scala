@@ -1,51 +1,54 @@
-//22100259 Final Project Assignment
 package ch.makery.game
 
-import ch.makery.game.MainApp.{getClass, stage}
+import ch.makery.game.view.{MainController, RootController}
 import javafx.fxml.FXMLLoader
-import javafx.scene as jfxs
+import javafx.scene.Scene
 import scalafx.Includes.*
 import scalafx.application.JFXApp3
 import scalafx.application.JFXApp3.PrimaryStage
-import scalafx.scene as sfxs
-import scalafx.scene.Scene
+import scalafx.scene.layout.BorderPane
 
 object MainApp extends JFXApp3 {
-  var roots: Option[sfxs.layout.BorderPane] = None
-  override def start(): Unit = {
-    val rootResource = getClass.getResource("view/RootLayout.fxml")
-    val loader = new FXMLLoader(rootResource)
-    loader.load()
-    roots = Option(loader.getRoot[jfxs.layout.BorderPane])
+  var roots: Option[BorderPane] = None
+  var mainController: Option[MainController] = None
+  var rootController: Option[RootController] = None
 
+  override def start(): Unit = {
+    val rootResource = getClass.getResource("/ch/makery/game/view/RootLayout.fxml")
+    val loader = new FXMLLoader(rootResource)
+
+    // Load the RootLayout.fxml for the menu bar
+    roots = Option(loader.load())
+
+    // Get the RootController instance from FXML
+    rootController = Option(loader.getController[RootController])
+
+    // Setup the primary stage and scene
     stage = new PrimaryStage():
       title = "Whack-a-mole Game"
-      scene = new Scene(){
+      scene = new Scene() {
         root = roots.get
         maxWidth = 960.0
         maxHeight = 540.0
       }
+    showMain()
+  }
 
-    showGame()
-  }
-  
   def showMain(): Unit = {
+    val mainViewResource = getClass.getResource("/ch/makery/game/view/MainView.fxml")
+    val mainLoader = new FXMLLoader(mainViewResource)
     
-  }
-  
-  def showGame(): Unit = {
-    val resource = getClass.getResource("view/MainView.fxml")
-    val loader = new FXMLLoader(resource)
-    loader.load()
-    val roots = loader.getRoot[jfxs.layout.AnchorPane]
-    this.roots.get.center = roots
-  }
-  
-  def showHistory(): Unit = {
+    val mainRoot = mainLoader.load()
     
-  }
-  
-  def showTutorial(): Unit = {
+    mainController = Option(mainLoader.getController[MainController])
     
+    rootController.foreach { controller =>
+      controller.rootPane.setCenter(mainRoot) 
+    }
+
+    mainController.foreach { controller =>
+      controller.initialize() 
+    }
+    println("Main game screen is now visible!")
   }
 }
