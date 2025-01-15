@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -12,7 +13,10 @@
 
 <AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.game.view.GameController">
     <children>
-        <ImageView fx:id="backgroundImageView" fitHeight="540.0" fitWidth="960.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="backgroundImageView" fitHeight="540.0" fitWidth="960.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/Hard.png" />
+         </image></ImageView>
         <GridPane fx:id="cellGrid" alignment="TOP_RIGHT" layoutX="300.0" layoutY="81.0" prefHeight="360.0" prefWidth="360.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -30,7 +34,10 @@
          <children>
             <Pane fx:id="cell0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="120.0" prefWidth="120.0">
                <children>
-                  <ImageView fx:id="cellImage0" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="cellImage0" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/Grey%20Mole.png" />
+                     </image></ImageView>
                </children>
             </Pane>
             <Pane fx:id="cell1" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="120.0" prefWidth="120.0" GridPane.columnIndex="1">
@@ -40,7 +47,10 @@
             </Pane>
             <Pane fx:id="cell2" layoutX="130.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="120.0" prefWidth="120.0" GridPane.columnIndex="2">
                <children>
-                  <ImageView fx:id="cellImage2" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="cellImage2" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/Brown%20Mole.png" />
+                     </image></ImageView>
                </children>
             </Pane>
             <Pane fx:id="cell3" layoutX="250.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="120.0" prefWidth="120.0" GridPane.rowIndex="1">
@@ -50,12 +60,18 @@
             </Pane>
             <Pane fx:id="cell4" layoutX="10.0" layoutY="131.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="120.0" prefWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <ImageView fx:id="cellImage4" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="cellImage4" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/Pink%20Mole.png" />
+                     </image></ImageView>
                </children>
             </Pane>
             <Pane fx:id="cell5" layoutX="130.0" layoutY="131.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="120.0" prefWidth="120.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <children>
-                  <ImageView fx:id="cellImage5" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="cellImage5" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/Bomb.png" />
+                     </image></ImageView>
                </children>
             </Pane>
             <Pane fx:id="cell6" layoutX="250.0" layoutY="131.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="120.0" prefWidth="120.0" GridPane.rowIndex="2">
@@ -65,7 +81,10 @@
             </Pane>
             <Pane fx:id="cell7" layoutX="10.0" layoutY="251.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="120.0" prefWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
-                  <ImageView fx:id="cellImage7" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="cellImage7" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/Brown%20Mole.png" />
+                     </image></ImageView>
                </children>
             </Pane>
             <Pane fx:id="cell8" layoutX="130.0" layoutY="251.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="120.0" prefWidth="120.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
