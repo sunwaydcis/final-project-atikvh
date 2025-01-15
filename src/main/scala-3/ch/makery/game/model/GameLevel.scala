@@ -3,14 +3,13 @@ package ch.makery.game.model
 
 abstract class GameLevel(
                           val name: String,
-                          val initialTimer: Int,
+                          val initialTimer: Int = 180,
                           val characterProbability: Map[String, Int],
                           val speed: Int,
                           val imagePath: String)
 
 case class EasyLevel() extends GameLevel(
   name = "Easy",
-  initialTimer = 180,
   characterProbability = Map(
     "Brown Mole" -> 100
   ),
@@ -20,7 +19,6 @@ case class EasyLevel() extends GameLevel(
 
 case class MediumLevel() extends GameLevel(
   name = "Medium",
-  initialTimer = 180,
   characterProbability = Map(
     "Brown Mole" -> 70,
     "Bomb" -> 30
@@ -31,7 +29,6 @@ case class MediumLevel() extends GameLevel(
 
 case class HardLevel() extends GameLevel(
   name = "Hard",
-  initialTimer = 180,
   characterProbability = Map(
     "Brown Mole" -> 50,
     "Pink Mole" -> 25,

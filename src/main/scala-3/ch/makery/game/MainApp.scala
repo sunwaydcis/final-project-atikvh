@@ -28,11 +28,24 @@ object MainApp extends JFXApp3 {
 
     showGame()
   }
+  
+  def showMain(): Unit = {
+    
+  }
+  
   def showGame(): Unit = {
     val resource = getClass.getResource("view/MainView.fxml")
     val loader = new FXMLLoader(resource)
     loader.load()
     val roots = loader.getRoot[jfxs.layout.AnchorPane]
     this.roots.get.center = roots
+  }
+  
+  def showHistory(): Unit = {
+    
+  }
+  
+  def showTutorial(): Unit = {
+    
   }
 }

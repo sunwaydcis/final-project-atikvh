@@ -1,20 +1,22 @@
 // 22100259 Final Project Assignment
 package ch.makery.game.model
 
+import ch.makery.game.util.Database
+import scalikejdbc.*
+import ch.makery.game.model.GameLevel
 import scala.collection.mutable
 import java.time.LocalDateTime
+import java.sql.*
 
 class Game {
   private var _score: Int = 0
   private var _timer: Int = 180 
-  private var _level: GameLevel = EasyLevel() 
-  private val _history: mutable.ListBuffer[GameHistory] = mutable.ListBuffer()
+  private var _level: GameLevel = EasyLevel()
   private var _speed: Int = _level.speed
   
   def score: Int = _score
   def timer: Int = _timer
   def level: GameLevel = _level
-  def history: Seq[GameHistory] = _history.toSeq // Immutable history view
   def speed: Int = _speed
 
   def startGame(level: GameLevel): Unit = {
@@ -39,13 +41,6 @@ class Game {
 
   def isGameOver: Boolean = _timer == 0
 
-  def saveHistory(): Unit = {
-    _history += GameHistory(java.time.LocalDateTime.now(), _level.name, _score)
-  }
-
-  def deleteHistory(index: Int): Unit = {
-    if (index >= 0 && index < history.size) _history.remove(index)
-  }
 
   def reset(): Unit = {
     _score = 0
@@ -82,10 +77,33 @@ class Game {
       }
     }.getOrElse(new BrownMole())
   }
-  
-  def initializeTable(): Unit = {
-    
-  }
 }
 
-case class GameHistory(dateTime: java.time.LocalDateTime, level: String, score: Int)
+object Game extends Database{
+  def apply(dateTime: LocalDateTime, levelS: GameLevel, scoreS: Int): Game =
+    new Game(scoreS, levelS.initialTimer, levelS, levelS.speed, dateTime)
+
+  def initializeTable() = Unit 
+    DB autoCommit { implicit session =>
+      sql"""
+          CREATE TABLE game (
+          id int NOT NULL GENERATED ALWAYS AS IDENTITY
+          (START WITH 1, INCREMENT BY 1),
+          dateTime timestamp,
+          level varchar(5),
+          score int
+          )
+          """.execute.apply()
+    }
+  
+  
+  def getAllGames: List[Game] = {
+    DB readOnly { implicit session =>
+      sql"SELECT * FROM game".map(rs => Game(
+        rs.localDateTime("dateTime"),
+        GameLevel.fromString(rs.string("level")),
+        rs.int("Score")
+      )).list.apply()
+    }
+  } 
+}
