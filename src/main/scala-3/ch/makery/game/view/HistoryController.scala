@@ -18,8 +18,7 @@ class HistoryController {
 
   @FXML
   def initialize(): Unit = {
-    // Fetch data from the database
-    val games = Game.getAllGamesWithId // Modified to include IDs
+    val games = Game.getAllGamesWithId 
     val data = FXCollections.observableArrayList(
       games.map { case (id, dateTime, level, score) =>
         (id, dateTime.toString, level, score)
@@ -43,5 +42,9 @@ class HistoryController {
     Score.setCellValueFactory(cellData =>
       new javafx.beans.property.SimpleIntegerProperty(cellData.getValue._4).asInstanceOf[javafx.beans.value.ObservableValue[Int]]
     )
+
+    Score.setComparator((score1, score2) => score2.compareTo(score1))
+
+    gameHistory.getSortOrder.add(Score)
   }
 }
