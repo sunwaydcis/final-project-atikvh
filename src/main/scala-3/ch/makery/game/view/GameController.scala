@@ -7,7 +7,7 @@ import javafx.scene.input.{KeyCode, KeyEvent}
 import scalafx.application.Platform
 import scalafx.scene.control.Label
 import scalafx.scene.image.{Image, ImageView}
-import scalafx.scene.layout.{AnchorPane, GridPane}
+import scalafx.scene.layout.{AnchorPane, GridPane, Pane}
 
 class GameController {
   @FXML var rootPane: AnchorPane =_
@@ -15,42 +15,38 @@ class GameController {
   @FXML var timerLabel: Label = _
   @FXML var cellGrid: GridPane = _
   @FXML var backgroundImageView: ImageView = _
+  @FXML var cell0: Pane = _
+  @FXML var cell1: Pane = _
+  @FXML var cell2: Pane = _
+  @FXML var cell3: Pane = _
+  @FXML var cell4: Pane = _
+  @FXML var cell5: Pane = _
+  @FXML var cell6: Pane = _
+  @FXML var cell7: Pane = _
+  @FXML var cell8: Pane = _
+  @FXML var cellImage0: ImageView = _
+  @FXML var cellImage1: ImageView = _
+  @FXML var cellImage2: ImageView = _
+  @FXML var cellImage3: ImageView = _
+  @FXML var cellImage4: ImageView = _
+  @FXML var cellImage5: ImageView = _
+  @FXML var cellImage6: ImageView = _
+  @FXML var cellImage7: ImageView = _
+  @FXML var cellImage8: ImageView = _
+
 
   private var game: Game = new Game()
   private var currentLevel: GameLevel = EasyLevel()
-  private val cells: Array[GameCell] =_
 
   def initialize(): Unit = {
-    setupGrid()
     startGame(currentLevel)
   }
-
-  private def setupGrid(): Unit = {
-    cells = Array.ofDimd.getChildren.clear()
-    for (i <- 0 until 9) {
-      val cell = new GameCell()
-      cells(i) = cell
-      cellGrid.add(cell.getPane, i % 3, i / 3)
-      
-    }
-  }
-
+  
   def startGame(level: GameLevel): Unit = {
     currentLevel = level
     game.startGame(level)
     updateBackground()
-    startTimer()
-  }
-
-  private def startTimer(): Unit = {
-    new Thread(() => {
-      while (!game.isGameOver) {
-        Platform.runLater(() => updateUI())
-        Thread.sleep(1000)
-        game.decrementTimer()
-      }
-      Platform.runLater(() => endGame())
-    }).start()
+    game.startGameLoop()
   }
 
   private def updateBackground(): Unit = {
@@ -63,22 +59,15 @@ class GameController {
   }
 
   def cellClicked(cellIndex: Int): Unit = {
-    val character = generateRandomCharacter()
+    val character: Character = game.generateRandomCharacter()
+    placeCharInCell(character, cellIndex)
     character.applyEffect(game)
     updateUI()
   }
-
-  private def generateRandomCharacter(): Character = {
-    val probabilities = currentLevel.characterProbability
-    val randomValue = scala.util.Random.nextInt(100)
-    probabilities.collectFirst {
-      case (character, threshold) if randomValue < threshold => character match {
-        case "Brown Mole" => BrownMole()
-        case "Pink Mole" => PinkMole()
-        case "Grey Mole" => GreyMole()
-        case "Bomb" => Bomb()
-      }
-    }.getOrElse(BrownMole())
+  
+  private def placeCharInCell(character: Character, cellIndex: Int): Unit = {
+    val characterImage = cellImages(cellIndex)
+    characterImage.image = new Image(character.imagePath)
   }
 
   private def handleKeyPress(event: KeyEvent): Unit = {
@@ -92,7 +81,7 @@ class GameController {
       case KeyCode.Z => cellClicked(6)
       case KeyCode.X => cellClicked(7)
       case KeyCode.C => cellClicked(8)
-      case _ => // Ignore
+      case _ => 
     }
   }
 
@@ -102,6 +91,8 @@ class GameController {
   }
 
   private def endGame(): Unit = {
-    game.saveHistory()
+    if (game.isGameOver){
+      game.saveHistory()
+    }
   }
 }

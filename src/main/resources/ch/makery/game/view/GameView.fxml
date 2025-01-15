@@ -29,12 +29,12 @@
             <InnerShadow />
          </effect>
          <children>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="120.0" prefWidth="120.0">
+            <Pane fx:id="cell0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="120.0" prefWidth="120.0">
                <effect>
                   <ColorInput height="115.0" paint="#563310" width="115.0" />
                </effect>
                <children>
-                  <ImageView fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="cellImage0" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <Pane layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="120.0" prefWidth="120.0" GridPane.columnIndex="1">

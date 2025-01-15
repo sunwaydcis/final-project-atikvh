@@ -52,7 +52,7 @@ class Game {
     _timer = _level.initialTimer
   }
   
-  private def startGameLoop(): Unit = {
+  def startGameLoop(): Unit = {
     new Thread(()=> {
       while (!isGameOver) {
         spawnCharacter()
@@ -71,7 +71,7 @@ class Game {
     val character = generateRandomCharacter()
   }
   
-  private def generateRandomCharacter(): Unit = {
+  def generateRandomCharacter(): Character = {
     val randomValue = scala.util.Random.nextInt(100)
     _level.characterProbability.collectFirst {
       case (character, threshold) if randomValue < threshold => character match {
